@@ -266,6 +266,63 @@ footer p {
     font-size: 0.9rem;
 }
 
+/* About Page */
+.about-page {
+    padding: 5rem 0;
+    background-color: var(--white);
+}
+
+.about-page h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.about-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.about-image {
+    position: sticky;
+    top: 100px;
+}
+
+.about-image img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: var(--text-dark);
+}
+
+.about-text a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.about-text a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+/* Active Navigation Link */
+.nav-menu a.active {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .navbar .container {
@@ -301,6 +358,20 @@ footer p {
 
     .quote-box blockquote {
         font-size: 1.2rem;
+    }
+
+    .about-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .about-image {
+        position: static;
+        text-align: center;
+    }
+
+    .about-image img {
+        max-width: 300px;
     }
 }
 
