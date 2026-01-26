@@ -316,6 +316,30 @@ body {
     margin-bottom: 1.5rem;
 }
 
+.connect-prompts {
+    list-style: none;
+    margin-bottom: 2rem;
+    display: inline-block;
+    text-align: left;
+}
+
+.connect-prompts li {
+    font-size: 1.05rem;
+    color: var(--text-dark);
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.connect-prompts li::before {
+    content: "›";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
 .contact-links {
     display: flex;
     justify-content: center;
