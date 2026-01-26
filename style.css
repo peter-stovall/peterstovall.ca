@@ -118,6 +118,19 @@ body {
     transform: translateY(-2px);
 }
 
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
 /* Navigation */
 .navbar {
     background-color: var(--bg-dark);
@@ -347,6 +360,13 @@ body {
     margin-bottom: 2rem;
 }
 
+.contact-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
 .contact-link {
     color: var(--secondary-color);
     text-decoration: none;
@@ -438,6 +458,16 @@ footer p {
     .contact-links {
         flex-direction: column;
         gap: 1rem;
+    }
+
+    .contact-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .contact-buttons .btn {
+        width: 100%;
+        text-align: center;
     }
 
     .communities-list {
