@@ -319,6 +319,31 @@ body {
 }
 
 /* Contact Section */
+#contact {
+    position: relative;
+    overflow: hidden;
+}
+
+#contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    background-image: url('images/peter-headshot.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right center;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+#contact .container {
+    position: relative;
+    z-index: 1;
+}
+
 .contact-content {
     text-align: center;
 }
