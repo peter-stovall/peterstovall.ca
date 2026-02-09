@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Peter Stovall - Thoughts on Product Management and climate-positive practices.">
+    <title>Thoughts | Peter Stovall</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- Access Gate -->
+    <script>
+        if (localStorage.getItem('thoughts.page') !== 'true') {
+            document.body.innerHTML = '';
+            window.location.href = 'index.html';
+        }
+    </script>
+
+    <!-- Banner -->
+    <header class="banner">
+        <div class="container banner-content">
+            <div class="banner-photo">
+                <a href="index.html"><img src="images/peter-headshot.png" alt="Peter Stovall"></a>
+            </div>
+            <div class="banner-text">
+                <h1><a href="index.html" style="color: inherit; text-decoration: none;">Peter Stovall</a></h1>
+                <p class="banner-tagline">0-to-1 Product Leader | Energy · Reg Tech · Legal Tech</p>
+            </div>
+            <div class="banner-cta">
+                <a href="https://appt.link/meet-with-peter-stovall-vQCRNarz/community" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i data-lucide="calendar"></i> Book a Call</a>
+                <a href="index.html#contact" class="btn btn-secondary"><i data-lucide="mail"></i> Email</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#contact">Connect</a></li>
+                <li><a href="index.html#skills">Skills</a></li>
+                <li><a href="index.html#career">Career</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="thoughts.html" class="nav-active">Thoughts</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Thoughts Intro Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Thoughts</h2>
+            <div class="section-content">
+                <p>I write on the why, what and how of Product Management, with a particular passion for climate-positive practices as a champion of the "Voice of the Planet", our ultimate customer.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Managers Can Fight Climate Change -->
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Product Managers can fight climate change</h2>
+            <div class="section-content">
+                <p>We are running out of time to reverse our destruction of the planet — our home. The evidence is overwhelming. Given the size of the issue, every job is now a climate job, to quote Jamie Alexander of Project Drawdown. At the same time, every company is a software company, to paraphrase Satya Nadella.</p>
+
+                <p><strong>You don't have to work on a climate tech product to make a difference.</strong></p>
+
+                <img src="images/climate-job-software.avif" alt="Product Managers - Climate Job + Software" class="thought-image">
+
+                <p>Whether you are building internal solutions, dashboards for hardware, or SaaS products — this one is for you. It's a win:win for your business and the planet because climate-positive development often translates to a better bottom line.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Sustainability Square -->
+    <section class="section">
+        <div class="container">
+            <div class="thought-card">
+                <span class="thought-type">Article</span>
+                <h3>The Sustainability Square</h3>
+                <div class="section-content">
+                    <p>The Sustainability Square is an alternative to the "Iron Triangle" of cost, quality and speed. The Square includes a fourth vector: carbon efficiency. This makes the climate cost of your prioritization and trade off decisions explicit, rather than relying on cost considerations as a proxy.</p>
+
+                    <img src="images/sustainability-square.avif" alt="The Sustainability Square - New Tradeoff Framework" class="thought-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Two by Two (by Two) -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="thought-card">
+                <span class="thought-type">Article</span>
+                <h3>Two by Two (by Two)</h3>
+                <div class="section-content">
+                    <p>The Impact vs Complexity quadrant (or "two by two") breaks ideas down into:</p>
+
+                    <ul class="thought-list">
+                        <li><strong>Quick wins</strong> that are high in value and low in cost (upper-left).</li>
+                        <li><strong>Big bets</strong> that are high in value and cost (upper-right).</li>
+                        <li><strong>Nice to have</strong> features that are low in cost and effort (lower-left).</li>
+                        <li><strong>Time sinks</strong> that are low in value and high in cost (lower-right).</li>
+                    </ul>
+
+                    <p>We can make the climate impact explicit by adding an additional plane for carbon efficiency. Each white dot on the graph represents impact/effort in the traditional way. A corresponding green dot represents carbon efficiency. Prioritization decisions would consider the spread between white and green dots. If the green dot is lagging in the lower hemisphere, it will undermine the initial attraction of that option.</p>
+
+                    <img src="images/carbon-efficiency-quadrant.avif" alt="Value vs Cost vs Carbon Efficiency Quadrant" class="thought-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Peter Stovall</p>
+        </div>
+    </footer>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

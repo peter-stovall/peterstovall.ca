@@ -37,7 +37,13 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#career">Career</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li id="thoughts-nav" style="display: none;"><a href="thoughts.html">Thoughts</a></li>
             </ul>
+            <script>
+                if (localStorage.getItem('thoughts.page') === 'true') {
+                    document.getElementById('thoughts-nav').style.display = '';
+                }
+            </script>
         </div>
     </nav>
 
