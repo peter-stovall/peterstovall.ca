@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>The Charter of the Most Honourable Clew of Bookworms</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+DW+Pica+SC&family=UnifrakturMaguntia&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&display=swap');
+
+  :root {
+    --parchment-light: #f5e6c8;
+    --parchment-mid: #e8d5a8;
+    --parchment-dark: #d4bf8a;
+    --ink-dark: #2c1810;
+    --ink-mid: #4a3228;
+    --ink-light: #6b4c3b;
+    --ink-red: #8b2500;
+    --ink-faded: #7a6552;
+    --worm-pink: #d4878f;
+    --worm-body: #c4727b;
+    --worm-dark: #a85860;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #3a2a1a;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* === WORM SVG ANIMATIONS === */
+  .worm-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .worm {
+    position: absolute;
+    opacity: 0.12;
+    filter: blur(0.5px);
+  }
+
+  .worm-1 {
+    top: 8%;
+    animation: crawl-right 38s linear infinite;
+  }
+
+  .worm-2 {
+    top: 25%;
+    animation: crawl-left 44s linear infinite;
+    animation-delay: -8s;
+  }
+
+  .worm-3 {
+    top: 50%;
+    animation: crawl-right 50s linear infinite;
+    animation-delay: -20s;
+  }
+
+  .worm-4 {
+    top: 72%;
+    animation: crawl-left 36s linear infinite;
+    animation-delay: -14s;
+  }
+
+  .worm-5 {
+    top: 90%;
+    animation: crawl-right 42s linear infinite;
+    animation-delay: -5s;
+  }
+
+  .worm-6 {
+    top: 38%;
+    animation: crawl-left 55s linear infinite;
+    animation-delay: -30s;
+  }
+
+  @keyframes crawl-right {
+    0% { left: -200px; transform: translateY(0); }
+    10% { transform: translateY(12px); }
+    20% { transform: translateY(-8px); }
+    30% { transform: translateY(15px); }
+    40% { transform: translateY(-5px); }
+    50% { transform: translateY(10px); }
+    60% { transform: translateY(-12px); }
+    70% { transform: translateY(8px); }
+    80% { transform: translateY(-6px); }
+    90% { transform: translateY(14px); }
+    100% { left: calc(100% + 200px); transform: translateY(0); }
+  }
+
+  @keyframes crawl-left {
+    0% { right: -200px; left: auto; transform: translateY(0) scaleX(-1); }
+    10% { transform: translateY(-10px) scaleX(-1); }
+    20% { transform: translateY(14px) scaleX(-1); }
+    30% { transform: translateY(-6px) scaleX(-1); }
+    40% { transform: translateY(11px) scaleX(-1); }
+    50% { transform: translateY(-13px) scaleX(-1); }
+    60% { transform: translateY(7px) scaleX(-1); }
+    70% { transform: translateY(-9px) scaleX(-1); }
+    80% { transform: translateY(12px) scaleX(-1); }
+    90% { transform: translateY(-4px) scaleX(-1); }
+    100% { right: calc(100% + 200px); left: auto; transform: translateY(0) scaleX(-1); }
+  }
+
+  .worm svg {
+    width: 180px;
+    height: auto;
+  }
+
+  /* Wriggle animation for the worm body segments */
+  @keyframes wriggle {
+    0%, 100% { d: path("M10,25 Q30,10 50,25 Q70,40 90,25 Q110,10 130,25 Q150,40 170,25"); }
+    25% { d: path("M10,25 Q30,38 50,25 Q70,12 90,25 Q110,38 130,25 Q150,12 170,25"); }
+    50% { d: path("M10,25 Q30,12 50,25 Q70,38 90,25 Q110,12 130,25 Q150,38 170,25"); }
+    75% { d: path("M10,25 Q30,35 50,25 Q70,15 90,25 Q110,35 130,25 Q150,15 170,25"); }
+  }
+
+  /* === PARCHMENT DOCUMENT === */
+  .parchment {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    width: 100%;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(210, 180, 130, 0.3) 0%, transparent 70%),
+      radial-gradient(ellipse at 80% 20%, rgba(200, 170, 120, 0.25) 0%, transparent 60%),
+      radial-gradient(ellipse at 50% 80%, rgba(190, 160, 110, 0.2) 0%, transparent 65%),
+      linear-gradient(
+        to bottom,
+        #e8d1a0,
+        #f0ddb5 3%,
+        #f5e6c8 8%,
+        #f2dfc0 20%,
+        #f5e6c8 35%,
+        #eedaaf 50%,
+        #f3e2be 65%,
+        #f0d9b2 80%,
+        #e8d1a0 95%,
+        #dcc48e
+      );
+    padding: 70px 65px 80px;
+    box-shadow:
+      0 0 0 1px rgba(139, 109, 66, 0.3),
+      inset 0 0 80px rgba(139, 109, 66, 0.15),
+      inset 0 0 20px rgba(139, 109, 66, 0.1),
+      0 4px 30px rgba(0, 0, 0, 0.4),
+      0 15px 60px rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+  }
+
+  /* Stain and age effects */
+  .parchment::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+      radial-gradient(ellipse at 15% 15%, rgba(139, 100, 50, 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 85% 85%, rgba(139, 100, 50, 0.08) 0%, transparent 40%),
+      radial-gradient(circle at 70% 30%, rgba(120, 80, 30, 0.06) 0%, transparent 30%),
+      radial-gradient(circle at 30% 70%, rgba(150, 110, 60, 0.1) 0%, transparent 35%);
+    pointer-events: none;
+    border-radius: 3px;
+  }
+
+  .parchment::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    border-radius: 3px;
+    opacity: 0.6;
+  }
+
+  /* Burnt/torn edge effect */
+  .edge-top, .edge-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 20px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .edge-top {
+    top: -2px;
+    background: linear-gradient(to bottom, rgba(58, 42, 26, 0.5) 0%, transparent 100%);
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 20'%3E%3Cpath d='M0,8 Q20,2 40,7 Q60,12 80,6 Q100,0 120,8 Q140,14 160,5 Q180,0 200,9 Q220,16 240,6 Q260,0 280,10 Q300,18 320,5 Q340,0 360,8 Q380,15 400,4 Q420,0 440,9 Q460,16 480,5 Q500,0 520,10 Q540,18 560,6 Q580,0 600,8 Q620,14 640,5 Q660,0 680,9 Q700,16 720,5 Q740,0 760,8 Q780,14 800,6 L800,0 L0,0 Z' fill='white'/%3E%3C/svg%3E");
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 20'%3E%3Cpath d='M0,8 Q20,2 40,7 Q60,12 80,6 Q100,0 120,8 Q140,14 160,5 Q180,0 200,9 Q220,16 240,6 Q260,0 280,10 Q300,18 320,5 Q340,0 360,8 Q380,15 400,4 Q420,0 440,9 Q460,16 480,5 Q500,0 520,10 Q540,18 560,6 Q580,0 600,8 Q620,14 640,5 Q660,0 680,9 Q700,16 720,5 Q740,0 760,8 Q780,14 800,6 L800,0 L0,0 Z' fill='white'/%3E%3C/svg%3E");
+    mask-size: 100% 100%;
+  }
+  .edge-bottom {
+    bottom: -2px;
+    background: linear-gradient(to top, rgba(58, 42, 26, 0.5) 0%, transparent 100%);
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 20'%3E%3Cpath d='M0,12 Q20,18 40,13 Q60,8 80,14 Q100,20 120,12 Q140,6 160,15 Q180,20 200,11 Q220,4 240,14 Q260,20 280,10 Q300,2 320,15 Q340,20 360,12 Q380,5 400,16 Q420,20 440,11 Q460,4 480,15 Q500,20 520,10 Q540,2 560,14 Q580,20 600,12 Q620,6 640,15 Q660,20 680,11 Q700,4 720,15 Q740,20 760,12 Q780,6 800,14 L800,20 L0,20 Z' fill='white'/%3E%3C/svg%3E");
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 20'%3E%3Cpath d='M0,12 Q20,18 40,13 Q60,8 80,14 Q100,20 120,12 Q140,6 160,15 Q180,20 200,11 Q220,4 240,14 Q260,20 280,10 Q300,2 320,15 Q340,20 360,12 Q380,5 400,16 Q420,20 440,11 Q460,4 480,15 Q500,20 520,10 Q540,2 560,14 Q580,20 600,12 Q620,6 640,15 Q660,20 680,11 Q700,4 720,15 Q740,20 760,12 Q780,6 800,14 L800,20 L0,20 Z' fill='white'/%3E%3C/svg%3E");
+    mask-size: 100% 100%;
+  }
+
+  /* === TYPOGRAPHY === */
+  .charter-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .title-block {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .hear-ye {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 14px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    margin-bottom: 15px;
+    display: block;
+  }
+
+  .we-the-worms {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 52px;
+    color: var(--ink-dark);
+    line-height: 1.1;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 2px rgba(44, 24, 16, 0.15);
+  }
+
+  .subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    margin-bottom: 8px;
+  }
+
+  .full-title {
+    font-family: 'IM Fell English', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--ink-mid);
+    margin-bottom: 5px;
+    line-height: 1.5;
+  }
+
+  /* Decorative divider */
+  .divider {
+    text-align: center;
+    margin: 25px 0;
+    color: var(--ink-light);
+    font-size: 18px;
+    letter-spacing: 4px;
+    opacity: 0.6;
+  }
+
+  .divider-ornate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px 0 25px;
+  }
+
+  .divider-ornate .line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--ink-light), transparent);
+    opacity: 0.4;
+  }
+
+  .divider-ornate .ornament {
+    font-family: 'Cinzel Decorative', serif;
+    color: var(--ink-light);
+    font-size: 20px;
+    opacity: 0.5;
+  }
+
+  /* Worm seal / emblem */
+  .seal {
+    text-align: center;
+    margin: 20px 0 30px;
+  }
+
+  .seal svg {
+    width: 120px;
+    height: 120px;
+    opacity: 0.85;
+  }
+
+  /* Preamble */
+  .preamble {
+    font-family: 'IM Fell English', serif;
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--ink-dark);
+    text-align: justify;
+    margin-bottom: 30px;
+    text-indent: 40px;
+  }
+
+  .preamble .dropcap {
+    font-family: 'UnifrakturMaguntia', cursive;
+    float: left;
+    font-size: 72px;
+    line-height: 0.7;
+    padding-right: 8px;
+    padding-top: 8px;
+    color: var(--ink-red);
+  }
+
+  /* Articles */
+  .article {
+    margin-bottom: 30px;
+  }
+
+  .article-header {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink-dark);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .article-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 14px;
+    color: var(--ink-red);
+    text-align: center;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+  }
+
+  .section {
+    margin-bottom: 18px;
+  }
+
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-mid);
+    margin-bottom: 6px;
+  }
+
+  .body-text {
+    font-family: 'IM Fell English', serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--ink-dark);
+    text-align: justify;
+  }
+
+  .body-text em {
+    font-style: italic;
+    color: var(--ink-mid);
+  }
+
+  .clause-list {
+    font-family: 'IM Fell English', serif;
+    font-size: 15.5px;
+    line-height: 1.8;
+    color: var(--ink-dark);
+    margin-left: 25px;
+    text-align: justify;
+  }
+
+  .clause-list .clause {
+    margin-bottom: 8px;
+    text-indent: -18px;
+    padding-left: 18px;
+  }
+
+  .clause-marker {
+    font-style: italic;
+    color: var(--ink-red);
+    margin-right: 4px;
+  }
+
+  /* Closing / Signatures */
+  .closing {
+    margin-top: 45px;
+    text-align: center;
+  }
+
+  .closing-text {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-mid);
+    margin-bottom: 30px;
+    line-height: 1.8;
+  }
+
+  .signature-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px 40px;
+    margin-top: 35px;
+    padding: 0 20px;
+  }
+
+  .signature {
+    text-align: center;
+    padding-bottom: 5px;
+  }
+
+  .signature-line {
+    border-bottom: 1px solid var(--ink-light);
+    width: 100%;
+    margin-bottom: 6px;
+    height: 30px;
+    opacity: 0.5;
+  }
+
+  .signature-label {
+    font-family: 'IM Fell English', serif;
+    font-size: 12px;
+    color: var(--ink-faded);
+    font-style: italic;
+  }
+
+  /* Wax Seal */
+  .wax-seal {
+    text-align: center;
+    margin: 40px 0 10px;
+  }
+
+  .wax-seal svg {
+    width: 90px;
+    height: 90px;
+    filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.3));
+  }
+
+  .year-stamp {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 6px;
+    color: var(--ink-faded);
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  /* Small screen adjustments */
+  @media (max-width: 600px) {
+    .parchment {
+      padding: 40px 30px 50px;
+    }
+    .we-the-worms {
+      font-size: 36px;
+    }
+    .signature-block {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Subtle page-in animation */
+  .parchment {
+    animation: unfurl 1.5s ease-out;
+  }
+
+  @keyframes unfurl {
+    0% {
+      opacity: 0;
+      transform: scale(0.96) translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ANIMATED WORMS CRAWLING ACROSS SCREEN -->
+<div class="worm-container">
+  <!-- Worm 1 -->
+  <div class="worm worm-1">
+    <svg viewBox="0 0 180 50" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="wg1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#c4727b"/>
+          <stop offset="50%" style="stop-color:#d4878f"/>
+          <stop offset="100%" style="stop-color:#b8636c"/>
+        </linearGradient>
+      </defs>
+      <path d="M10,25 Q30,10 50,25 Q70,40 90,25 Q110,10 130,25 Q150,40 170,25" stroke="url(#wg1)" stroke-width="8" fill="none" stroke-linecap="round">
+        <animate attributeName="d" dur="1.2s" repeatCount="indefinite"
+          values="M10,25 Q30,10 50,25 Q70,40 90,25 Q110,10 130,25 Q150,40 170,25;
+                  M10,25 Q30,38 50,25 Q70,12 90,25 Q110,38 130,25 Q150,12 170,25;
+                  M10,25 Q30,10 50,25 Q70,40 90,25 Q110,10 130,25 Q150,40 170,25"/>
+      </path>
+      <circle cx="170" cy="25" r="4" fill="#d4878f">
+        <animate attributeName="cy" dur="1.2s" repeatCount="indefinite" values="25;25;25"/>
+      </circle>
+      <circle cx="172" cy="23" r="1.2" fill="#2c1810"/>
+      <circle cx="172" cy="27" r="1.2" fill="#2c1810"/>
+    </svg>
+  </div>
+
+  <!-- Worm 2 -->
+  <div class="worm worm-2">
+    <svg viewBox="0 0 180 50" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="wg2" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#a8856e"/>
+          <stop offset="50%" style="stop-color:#c49b80"/>
+          <stop offset="100%" style="stop-color:#9a7760"/>
+        </linearGradient>
+      </defs>
+      <path d="M10,25 Q30,10 50,25 Q70,40 90,25 Q110,10 130,25 Q150,40 170,25" stroke="url(#wg2)" stroke-width="7" fill="none" stroke-linecap="round">
+        <animate attributeName="d" dur="1.5s" repeatCount="indefinite"
+          values="M10,25 Q30,10 50,25 Q70,40 90,25 Q110,10 130,25 Q150,40 170,25;
+                  M10,25 Q30,35 50,25 Q70,15 90,25 Q110,35 130,25 Q150,15 170,25;
+                  M10,25 Q30,10 50,25 Q70,40 90,25 Q110,10 130,25 Q150,40 170,25"/>
+      </path>
+      <circle cx="170" cy="25" r="3.5" fill="#c49b80"/>
+      <circle cx="172" cy="23.5" r="1" fill="#2c1810"/>
+      <circle cx="172" cy="26.5" r="1" fill="#2c1810"/>
+    </svg>
+  </div>
+
+  <!-- Worm 3 (bigger) -->
+  <div class="worm worm-3" style="opacity: 0.08;">
+    <svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" style="width: 240px;">
+      <defs>
+        <linearGradient id="wg3" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#8b6e5a"/>
+          <stop offset="50%" style="stop-color:#a88872"/>
+          <stop offset="100%" style="stop-color:#7d604c"/>
+        </linearGradient>
+      </defs>
+      <path d="M10,25 Q35,8 60,25 Q85,42 110,25 Q135,8 160,25 Q185,42 210,25" stroke="url(#wg3)" stroke-width="10" fill="none" stroke-linecap="round">
+        <animate attributeName="d" dur="1.8s" repeatCount="indefinite"
+          values="M10,25 Q35,8 60,25 Q85,42 110,25 Q135,8 160,25 Q185,42 210,25;
+                  M10,25 Q35,40 60,25 Q85,10 110,25 Q135,40 160,25 Q185,10 210,25;
+                  M10,25 Q35,8 60,25 Q85,42 110,25 Q135,8 160,25 Q185,42 210,25"/>
+      </path>
+      <circle cx="210" cy="25" r="5" fill="#a88872"/>
+      <circle cx="213" cy="22.5" r="1.5" fill="#2c1810"/>
+      <circle cx="213" cy="27.5" r="1.5" fill="#2c1810"/>
+    </svg>
+  </div>
+
+  <!-- Worm 4 -->
+  <div class="worm worm-4">
+    <svg viewBox="0 0 150 50" xmlns="http://www.w3.org/2000/svg" style="width: 140px;">
+      <defs>
+        <linearGradient id="wg4" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#b07070"/>
+          <stop offset="50%" style="stop-color:#cc8888"/>
+          <stop offset="100%" style="stop-color:#a06060"/>
+        </linearGradient>
+      </defs>
+      <path d="M10,25 Q30,12 50,25 Q70,38 90,25 Q110,12 140,25" stroke="url(#wg4)" stroke-width="6" fill="none" stroke-linecap="round">
+        <animate attributeName="d" dur="1s" repeatCount="indefinite"
+          values="M10,25 Q30,12 50,25 Q70,38 90,25 Q110,12 140,25;
+                  M10,25 Q30,36 50,25 Q70,14 90,25 Q110,36 140,25;
+                  M10,25 Q30,12 50,25 Q70,38 90,25 Q110,12 140,25"/>
+      </path>
+      <circle cx="140" cy="25" r="3" fill="#cc8888"/>
+      <circle cx="142" cy="23.5" r="1" fill="#2c1810"/>
+      <circle cx="142" cy="26.5" r="1" fill="#2c1810"/>
+    </svg>
+  </div>
+
+  <!-- Worm 5 -->
+  <div class="worm worm-5" style="opacity: 0.1;">
+    <svg viewBox="0 0 180 50" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="wg5" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#9a7a6a"/>
+          <stop offset="50%" style="stop-color:#b89484"/>
+          <stop offset="100%" style="stop-color:#8c6c5c"/>
+        </linearGradient>
+      </defs>
+      <path d="M10,25 Q30,10 50,25 Q70,40 90,25 Q110,10 130,25 Q150,40 170,25" stroke="url(#wg5)" stroke-width="7" fill="none" stroke-linecap="round">
+        <animate attributeName="d" dur="1.4s" repeatCount="indefinite"
+          values="M10,25 Q30,10 50,25 Q70,40 90,25 Q110,10 130,25 Q150,40 170,25;
+                  M10,25 Q30,37 50,25 Q70,13 90,25 Q110,37 130,25 Q150,13 170,25;
+                  M10,25 Q30,10 50,25 Q70,40 90,25 Q110,10 130,25 Q150,40 170,25"/>
+      </path>
+      <circle cx="170" cy="25" r="3.5" fill="#b89484"/>
+      <circle cx="172" cy="23" r="1.1" fill="#2c1810"/>
+      <circle cx="172" cy="27" r="1.1" fill="#2c1810"/>
+    </svg>
+  </div>
+
+  <!-- Worm 6 -->
+  <div class="worm worm-6" style="opacity: 0.06;">
+    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg" style="width: 200px;">
+      <defs>
+        <linearGradient id="wg6" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#c87878"/>
+          <stop offset="50%" style="stop-color:#d89090"/>
+          <stop offset="100%" style="stop-color:#b86868"/>
+        </linearGradient>
+      </defs>
+      <path d="M10,25 Q35,8 60,25 Q85,42 110,25 Q135,8 160,25 Q185,42 200,30" stroke="url(#wg6)" stroke-width="9" fill="none" stroke-linecap="round">
+        <animate attributeName="d" dur="2s" repeatCount="indefinite"
+          values="M10,25 Q35,8 60,25 Q85,42 110,25 Q135,8 160,25 Q185,42 200,30;
+                  M10,25 Q35,40 60,25 Q85,10 110,25 Q135,40 160,25 Q185,10 200,20;
+                  M10,25 Q35,8 60,25 Q85,42 110,25 Q135,8 160,25 Q185,42 200,30"/>
+      </path>
+      <circle cx="200" cy="30" r="4.5" fill="#d89090">
+        <animate attributeName="cy" dur="2s" repeatCount="indefinite" values="30;20;30"/>
+      </circle>
+      <circle cx="203" cy="28" r="1.3" fill="#2c1810">
+        <animate attributeName="cy" dur="2s" repeatCount="indefinite" values="28;18;28"/>
+      </circle>
+      <circle cx="203" cy="32" r="1.3" fill="#2c1810">
+        <animate attributeName="cy" dur="2s" repeatCount="indefinite" values="32;22;32"/>
+      </circle>
+    </svg>
+  </div>
+</div>
+
+<!-- === THE CHARTER === -->
+<div class="parchment">
+  <div class="edge-top"></div>
+  <div class="edge-bottom"></div>
+
+  <div class="charter-content">
+
+    <div class="title-block">
+      <span class="hear-ye">Hear Ye, Hear Ye</span>
+      <div class="we-the-worms">We the Worms</div>
+      <div class="subtitle">of the Literarie Soil</div>
+      <div class="divider">&#10045; &ensp; &#10045; &ensp; &#10045;</div>
+      <div class="full-title">
+        The Grand &amp; Perpetuall Charter<br>
+        of the Most Honourable Clew of Bookworms
+      </div>
+    </div>
+
+    <!-- Worm Seal Emblem -->
+    <div class="seal">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer circle -->
+        <circle cx="60" cy="60" r="55" fill="none" stroke="#4a3228" stroke-width="2" opacity="0.6"/>
+        <circle cx="60" cy="60" r="50" fill="none" stroke="#4a3228" stroke-width="1" opacity="0.4"/>
+        <!-- Inner stars -->
+        <g opacity="0.5" fill="#4a3228">
+          <text x="60" y="22" text-anchor="middle" font-size="8" font-family="Cinzel, serif" letter-spacing="4">&#9733; &#9733; &#9733; &#9733;</text>
+        </g>
+        <!-- Worm with book -->
+        <g transform="translate(60,62)" opacity="0.7">
+          <!-- Book -->
+          <rect x="-18" y="-5" width="36" height="24" rx="2" fill="none" stroke="#4a3228" stroke-width="1.5"/>
+          <line x1="0" y1="-5" x2="0" y2="19" stroke="#4a3228" stroke-width="1" opacity="0.5"/>
+          <!-- Worm coming out of book -->
+          <path d="M-5,-5 Q-8,-18 0,-22 Q8,-18 5,-5" stroke="#a85860" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <circle cx="0" cy="-24" r="4" fill="#d4878f" opacity="0.8"/>
+          <circle cx="-1.5" cy="-25.5" r="0.8" fill="#2c1810"/>
+          <circle cx="1.5" cy="-25.5" r="0.8" fill="#2c1810"/>
+          <!-- Tiny reading glasses -->
+          <circle cx="-2.5" cy="-23.5" r="2" fill="none" stroke="#4a3228" stroke-width="0.5" opacity="0.7"/>
+          <circle cx="2.5" cy="-23.5" r="2" fill="none" stroke="#4a3228" stroke-width="0.5" opacity="0.7"/>
+          <line x1="-0.5" y1="-23.5" x2="0.5" y2="-23.5" stroke="#4a3228" stroke-width="0.5" opacity="0.7"/>
+        </g>
+        <!-- Bottom text -->
+        <g opacity="0.5" fill="#4a3228">
+          <text x="60" y="108" text-anchor="middle" font-size="6.5" font-family="Cinzel, serif" letter-spacing="2">ANNO VERMIS</text>
+        </g>
+        <!-- Stars bottom -->
+        <g opacity="0.5" fill="#4a3228">
+          <text x="60" y="98" text-anchor="middle" font-size="8" font-family="Cinzel, serif" letter-spacing="4">&#9733; &#9733; &#9733; &#9733;</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="divider-ornate">
+      <span class="line"></span>
+      <span class="ornament">&#10087;</span>
+      <span class="line"></span>
+    </div>
+
+    <!-- PREAMBLE -->
+    <p class="preamble">
+      <span class="dropcap">W</span>e, the Worms of Sound Mind and Segmented Body, burrowing forth from the Good Earth in pursuit of Knowledge, Camaraderie, and the turning of Pages most fyne, do hereby ordain and establish this Charter for the governance of our Clew. Let it be known unto all Creatures, invertebrate and otherwise, that this Compact shall bind us in literary fellowship, that we might read together, discourse with vigour, and burrow ever deeper into the rich soil of Letters. So say we all, from head to whichever end we happen to be facing.
+    </p>
+
+    <div class="divider-ornate">
+      <span class="line"></span>
+      <span class="ornament">&#10087;</span>
+      <span class="line"></span>
+    </div>
+
+    <!-- ARTICLE I — MEMBERSHIP -->
+    <div class="article">
+      <div class="article-header">Article the First</div>
+      <div class="article-title">Of Membership &amp; the Counting of Worms</div>
+
+      <div class="section">
+        <div class="section-label">Section I.</div>
+        <p class="body-text">
+          The membership of this Clew shall be limited to Eight (8) Worms of Good Standing, and not one segment more. This number, being just and proper for vigorous discourse yet intimate enough for true fellowship, shall not be exceeded save by amendment to this Charter as described herein.
+        </p>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Section II. — On the Matter of Amputation.</div>
+        <p class="body-text">
+          In the unfortunate &amp; lamentable event that a Worm be sundered in twain — whether by spade, bird, or misadventure — that Worm shall be obliged to declare, within a fortnight of said severing, which half shall retain membership in this Clew. The unchosen half shall be regarded henceforth as a separate Worm entirely, possessed of no claim to the seat, the reading list, or the snacks. Let there be no ambiguity: <em>one worm, one vote; one half, one farewell.</em>
+        </p>
+      </div>
+    </div>
+
+    <!-- ARTICLE II — GOOD STANDING -->
+    <div class="article">
+      <div class="article-header">Article the Second</div>
+      <div class="article-title">Of Good Standing &amp; the Duties of a Diligent Worm</div>
+
+      <div class="section">
+        <div class="section-label">Section I.</div>
+        <p class="body-text">
+          Each Worm shall maintain Good Standing at all times. A Worm shall be deemed to be in Good Standing if, and only if, the following conditions be met in their entirety:
+        </p>
+        <div class="clause-list">
+          <div class="clause">
+            <span class="clause-marker">(i)</span> The Worm hath attended more than fifty per centum (50%) of all Clew Gatherings upon a rolling basis of six calendar months; <em>and</em>
+          </div>
+          <div class="clause">
+            <span class="clause-marker">(ii)</span> The Worm hath not been absent from more than two (2) consecutive Clew Gatherings without having declared Good Cause no fewer than three (3) weeks in advance of each respective Gathering so missed.
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Section II. — On the Nature of Good Cause.</div>
+        <p class="body-text">
+          Good Cause shall be understood to mean any of the following, &amp; such like circumstances as a Worm of sound judgement would consider sufficient:
+        </p>
+        <div class="clause-list">
+          <div class="clause">
+            <span class="clause-marker">(a)</span> Travel for Work or Pleasure, be it through soil foreign or domestic;
+          </div>
+          <div class="clause">
+            <span class="clause-marker">(b)</span> Injury or Illness, accompanied by verbal or visual proof satisfactory to the Clew — a pale complexion, a crooked segment, or a physician's note (if Worm physicians do exist) shall suffice;
+          </div>
+          <div class="clause">
+            <span class="clause-marker">(c)</span> Any other cause that a Worm of reasonable temperament and good character would deem just and proper. The Clew shall interpret this clause with generosity of spirit, but not with foolishness.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARTICLE III — EJECTION -->
+    <div class="article">
+      <div class="article-header">Article the Third</div>
+      <div class="article-title">Of Ejection &amp; the Casting Out of Wayward Worms</div>
+
+      <div class="section">
+        <div class="section-label">Section I.</div>
+        <p class="body-text">
+          Any Worm who doth fail, at any point in time, to satisfy the conditions of Good Standing as set forth in Article the Second shall be <em>ipso facto</em> and without further ceremony removed from this Clew. There shall be no appeal, no wriggling out of it, and no hard feelings — for the Charter is the Charter, and even a Worm must live by a Code.
+        </p>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Section II.</div>
+        <p class="body-text">
+          The ejected Worm shall be notified of their removal by such means as the Clew deems fit — be it a solemn message, a gentle tap on the segment, or a note left in their burrow. The ejected Worm may, at some future date, be considered for readmission under the provisions of Article the Fourth, should a vacancy arise and the Clew be so inclined.
+        </p>
+      </div>
+    </div>
+
+    <!-- ARTICLE IV — MEMBER SELECTION -->
+    <div class="article">
+      <div class="article-header">Article the Fourth</div>
+      <div class="article-title">Of Selection &amp; the Filling of Empty Wormholes</div>
+
+      <div class="section">
+        <div class="section-label">Section I.</div>
+        <p class="body-text">
+          When a Worm doth perish (may they rest in compost), is cast out by the terms of this Charter, or doth voluntarily de-Worm — that is, withdraw of their own free will from the fellowship — the Clew may, at its next scheduled Gathering, vote upon a replacement to fill the empty Wormhole.
+        </p>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Section II.</div>
+        <p class="body-text">
+          Any Worm in Good Standing may nominate a candidate. The nominee must be of sound character, literary curiosity, and willing to abide by this Charter in its entirety. A simple majority of Worms present at the Gathering shall suffice to admit the new member, who shall thereupon enjoy all rights, responsibilities, and reading assignments pertaining to membership in this Clew.
+        </p>
+      </div>
+    </div>
+
+    <div class="divider-ornate">
+      <span class="line"></span>
+      <span class="ornament">&#10087;</span>
+      <span class="line"></span>
+    </div>
+
+    <!-- CLOSING -->
+    <div class="closing">
+      <p class="closing-text">
+        Done in Convention, by the Unanimous Consent of the Worms present,<br>
+        in the Year of our Soil, Two Thousand and Twenty-Six.<br><br>
+        In Witness whereof We have hereunto set our Segments.
+      </p>
+
+      <div class="signature-block">
+        <div class="signature">
+          <div class="signature-line"></div>
+          <div class="signature-label">Worm the First</div>
+        </div>
+        <div class="signature">
+          <div class="signature-line"></div>
+          <div class="signature-label">Worm the Second</div>
+        </div>
+        <div class="signature">
+          <div class="signature-line"></div>
+          <div class="signature-label">Worm the Third</div>
+        </div>
+        <div class="signature">
+          <div class="signature-line"></div>
+          <div class="signature-label">Worm the Fourth</div>
+        </div>
+        <div class="signature">
+          <div class="signature-line"></div>
+          <div class="signature-label">Worm the Fifth</div>
+        </div>
+        <div class="signature">
+          <div class="signature-line"></div>
+          <div class="signature-label">Worm the Sixth</div>
+        </div>
+        <div class="signature">
+          <div class="signature-line"></div>
+          <div class="signature-label">Worm the Seventh</div>
+        </div>
+        <div class="signature">
+          <div class="signature-line"></div>
+          <div class="signature-label">Worm the Eighth</div>
+        </div>
+      </div>
+
+      <!-- Wax Seal -->
+      <div class="wax-seal">
+        <svg viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+          <!-- Irregular wax shape -->
+          <path d="M45,5 Q60,2 70,12 Q82,18 85,35 Q88,52 78,65 Q70,78 55,83 Q42,88 28,80 Q14,72 8,58 Q3,42 8,28 Q14,14 30,8 Z"
+            fill="#8b1a1a" opacity="0.85"/>
+          <path d="M45,5 Q60,2 70,12 Q82,18 85,35 Q88,52 78,65 Q70,78 55,83 Q42,88 28,80 Q14,72 8,58 Q3,42 8,28 Q14,14 30,8 Z"
+            fill="url(#waxGrad)" opacity="0.9"/>
+          <defs>
+            <radialGradient id="waxGrad" cx="40%" cy="35%" r="60%">
+              <stop offset="0%" style="stop-color:#c62828"/>
+              <stop offset="50%" style="stop-color:#a31515"/>
+              <stop offset="100%" style="stop-color:#6d0e0e"/>
+            </radialGradient>
+          </defs>
+          <!-- Embossed W -->
+          <text x="45" y="52" text-anchor="middle" font-family="UnifrakturMaguntia, cursive" font-size="32" fill="#7a1010" opacity="0.6">W</text>
+          <text x="44" y="51" text-anchor="middle" font-family="UnifrakturMaguntia, cursive" font-size="32" fill="#d44040" opacity="0.5">W</text>
+          <!-- Highlight -->
+          <ellipse cx="35" cy="30" rx="12" ry="8" fill="white" opacity="0.08" transform="rotate(-20, 35, 30)"/>
+        </svg>
+      </div>
+
+      <div class="year-stamp">&#9733; &ensp; M M X X V I &ensp; &#9733;</div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
