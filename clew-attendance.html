@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Ledger of Attendance — The Clew of Bookworms</title>
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+DW+Pica+SC&family=UnifrakturMaguntia&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&display=swap');
+
+  :root {
+    --parchment-light: #f5e6c8;
+    --ink-dark: #2c1810;
+    --ink-mid: #4a3228;
+    --ink-light: #6b4c3b;
+    --ink-red: #8b2500;
+    --ink-faded: #7a6552;
+    --good: #3f6b3f;
+    --good-bg: #e3ecdd;
+    --risk: #8b6b1f;
+    --risk-bg: #f2e6c8;
+    --breach: #8b2500;
+    --breach-bg: #f2ddd0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #3a2a1a;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  .parchment {
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(210, 180, 130, 0.3) 0%, transparent 70%),
+      radial-gradient(ellipse at 80% 20%, rgba(200, 170, 120, 0.25) 0%, transparent 60%),
+      linear-gradient(to bottom, #e8d1a0, #f0ddb5 3%, #f5e6c8 8%, #f2dfc0 20%, #f5e6c8 35%, #eedaaf 50%, #f3e2be 65%, #f0d9b2 80%, #e8d1a0 95%, #dcc48e);
+    padding: 55px 50px 60px;
+    box-shadow:
+      0 0 0 1px rgba(139, 109, 66, 0.3),
+      inset 0 0 80px rgba(139, 109, 66, 0.15),
+      0 4px 30px rgba(0, 0, 0, 0.4),
+      0 15px 60px rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+  }
+
+  /* === GATE === */
+  #gate .title-block { text-align: center; margin-bottom: 25px; }
+  .hear-ye {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 13px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    display: block;
+    margin-bottom: 12px;
+  }
+  .we-the-worms {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 40px;
+    color: var(--ink-dark);
+    line-height: 1.1;
+  }
+  .subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    margin-top: 6px;
+  }
+
+  #gate .gate-body {
+    max-width: 380px;
+    margin: 30px auto 0;
+    text-align: center;
+  }
+  #gate p {
+    font-family: 'IM Fell English', serif;
+    font-size: 16px;
+    color: var(--ink-dark);
+    line-height: 1.7;
+    margin-bottom: 22px;
+  }
+  #gate input[type="password"] {
+    width: 100%;
+    font-family: 'IM Fell English', serif;
+    font-size: 17px;
+    padding: 10px 14px;
+    border: 1px solid var(--ink-light);
+    background: rgba(255,255,255,0.35);
+    color: var(--ink-dark);
+    border-radius: 2px;
+    text-align: center;
+  }
+  #gate button {
+    margin-top: 14px;
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 26px;
+    background: var(--ink-dark);
+    color: var(--parchment-light);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  #gate button:hover { background: var(--ink-mid); }
+  #gate-error {
+    margin-top: 12px;
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    color: var(--breach);
+    min-height: 20px;
+    font-size: 14px;
+  }
+  .gate-note {
+    margin-top: 30px;
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 12.5px;
+    color: var(--ink-faded);
+    line-height: 1.6;
+  }
+
+  /* === CONTENT === */
+  #content { display: none; }
+
+  .divider-ornate {
+    display: flex; align-items: center; justify-content: center;
+    gap: 15px; margin: 28px 0 25px;
+  }
+  .divider-ornate .line {
+    flex: 1; height: 1px;
+    background: linear-gradient(to right, transparent, var(--ink-light), transparent);
+    opacity: 0.4;
+  }
+  .divider-ornate .ornament {
+    font-family: 'Cinzel Decorative', serif; color: var(--ink-light);
+    font-size: 18px; opacity: 0.5;
+  }
+
+  .section-heading {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink-dark);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 34px 0 14px;
+  }
+
+  .intro-text {
+    font-family: 'IM Fell English', serif;
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--ink-mid);
+  }
+
+  /* member cards */
+  .member-card {
+    background: rgba(255,255,255,0.28);
+    border: 1px solid rgba(74,50,40,0.25);
+    border-radius: 3px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+  }
+  .member-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
+  .member-name {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink-dark);
+  }
+  .member-tally {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-faded);
+  }
+  .status-pill {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .status-good { color: var(--good); background: var(--good-bg); }
+  .status-risk { color: var(--risk); background: var(--risk-bg); }
+  .status-breach { color: var(--breach); background: var(--breach-bg); }
+
+  .member-reasoning {
+    font-family: 'IM Fell English', serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-dark);
+    margin-top: 10px;
+  }
+  .member-reasoning ul {
+    margin: 6px 0 0 20px;
+  }
+  .member-reasoning li { margin-bottom: 4px; }
+  .flag {
+    font-style: italic;
+    color: var(--ink-red);
+  }
+
+  /* gathering log table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'IM Fell English', serif;
+    font-size: 14.5px;
+    color: var(--ink-dark);
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid rgba(74,50,40,0.2);
+    vertical-align: top;
+  }
+  th {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+  }
+  .muted { color: var(--ink-faded); font-style: italic; }
+
+  .assumption-box {
+    background: rgba(139,37,0,0.06);
+    border-left: 3px solid var(--ink-red);
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-family: 'IM Fell English', serif;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--ink-dark);
+  }
+  .assumption-box strong { color: var(--ink-red); }
+
+  footer.page-footer {
+    margin-top: 40px;
+    text-align: center;
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ink-faded);
+  }
+
+  @media (max-width: 640px) {
+    .parchment { padding: 35px 22px 40px; }
+    .we-the-worms { font-size: 30px; }
+    .member-head { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="parchment">
+
+  <!-- === PASSWORD GATE === -->
+  <div id="gate">
+    <div class="title-block">
+      <span class="hear-ye">Hear Ye, Hear Ye</span>
+      <div class="we-the-worms">Ledger of Attendance</div>
+      <div class="subtitle">Most Honourable Clew of Bookworms</div>
+    </div>
+    <div class="gate-body">
+      <p>This ledger is for Worms only. Enter the word.</p>
+      <input type="password" id="gate-input" autocomplete="off" spellcheck="false" placeholder="password">
+      <br>
+      <button id="gate-submit">Enter</button>
+      <div id="gate-error"></div>
+      <div class="gate-note">
+        This is a casual barrier, not real security — it's a static site with no backend, so anyone who opens the page source can read the check. It exists to keep this off search engines and off casual passers-by, not to protect anything sensitive.
+      </div>
+    </div>
+  </div>
+
+  <!-- === CONTENT (revealed after gate) === -->
+  <div id="content">
+    <div class="title-block">
+      <span class="hear-ye">Hear Ye, Hear Ye</span>
+      <div class="we-the-worms">Ledger of Attendance</div>
+      <div class="subtitle">Most Honourable Clew of Bookworms</div>
+    </div>
+
+    <div class="divider-ornate"><span class="line"></span><span class="ornament">&#10087;</span><span class="line"></span></div>
+
+    <p class="intro-text">
+      Per <a href="clew-charter-b7k2xp9m4q3r8v1n5j6d.html" style="color: var(--ink-red);">the Charter</a> as amended: Good Standing requires attending 5 or more of the last 8 Gatherings within the current cycle, and not being absent more than 2 consecutive Gatherings without a Good Cause declared at least 4 weeks in advance for each. Good Cause itself is always the Clew's judgment call — this page only checks the objective facts (was something declared, and was it on time) and shows its work so you can check its reading against your own.
+    </p>
+
+    <div class="assumption-box">
+      <strong>Modeling assumption to flag:</strong> the charter's consecutive-absence clause is grammatically ambiguous about whether a run of 3+ consecutive absences needs Good Cause on <em>every</em> absence in the run, or only the ones beyond the first two. This page takes the stricter reading (every absence in a run longer than 2 needs its own valid, timely declaration) since that's the more defensible drafting convention — but it's a genuine judgment call, and the per-gathering breakdown below lets you re-check it under the looser reading if the Clew prefers.
+    </div>
+
+    <div class="section-heading">Member Status</div>
+    <div id="member-list"></div>
+
+    <div class="section-heading">Gathering Log</div>
+    <table id="gathering-table">
+      <thead><tr><th>Date</th><th>Attended</th><th>Absent</th><th>Notes</th></tr></thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="section-heading">Good Cause Declarations on File</div>
+    <table id="cause-table">
+      <thead><tr><th>Member</th><th>Missed Gathering</th><th>Declared</th><th>Notice</th><th>Reason</th></tr></thead>
+      <tbody></tbody>
+    </table>
+
+    <footer class="page-footer">
+      Data hand-edited in clew-attendance-data.js. Update it and push to reflect a new Gathering.
+    </footer>
+  </div>
+
+</div>
+
+<script src="clew-attendance-data.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  // === PASSWORD GATE ===
+  // Casual barrier only — see the note on the gate itself. The hash below
+  // is SHA-256 of the password; change the password by hashing a new
+  // string (e.g. in a browser console:
+  //   crypto.subtle.digest('SHA-256', new TextEncoder().encode('newword'))
+  //     .then(b => console.log([...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')))
+  // ) and pasting the result below.
+  var GATE_HASH = "ba91cd80cc8cb86386a6a871151dae87eb8292efc6b2f3c1a04649fb73a15d01";
+  var SESSION_KEY = "clew.attendance.unlocked";
+
+  function sha256Hex(text) {
+    var data = new TextEncoder().encode(text);
+    return crypto.subtle.digest("SHA-256", data).then(function (buf) {
+      return Array.prototype.map.call(new Uint8Array(buf), function (b) {
+        return b.toString(16).padStart(2, "0");
+      }).join("");
+    });
+  }
+
+  function unlock() {
+    document.getElementById("gate").style.display = "none";
+    document.getElementById("content").style.display = "block";
+    renderReport();
+  }
+
+  function tryUnlock(pw) {
+    if (!window.crypto || !window.crypto.subtle) {
+      document.getElementById("gate-error").textContent =
+        "Can't check the password here — this browser only allows the crypto check over http(s), not a file:// page. Run a local server (e.g. python -m http.server) and reload.";
+      return;
+    }
+    sha256Hex(pw).then(function (hex) {
+      if (hex === GATE_HASH) {
+        sessionStorage.setItem(SESSION_KEY, "true");
+        unlock();
+      } else {
+        document.getElementById("gate-error").textContent = "That is not the word.";
+      }
+    });
+  }
+
+  document.getElementById("gate-submit").addEventListener("click", function () {
+    tryUnlock(document.getElementById("gate-input").value);
+  });
+  document.getElementById("gate-input").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") tryUnlock(this.value);
+  });
+
+  if (sessionStorage.getItem(SESSION_KEY) === "true") {
+    unlock();
+  }
+
+  // === REPORT LOGIC ===
+  function renderReport() {
+    var data = CLEW_ATTENDANCE_DATA;
+    var members = data.members;
+
+    // Build a flat, chronologically-sorted timeline of every gathering
+    // we know about (prior + current cycle), each tagged with which
+    // cycle it belongs to for tally purposes.
+    var timeline = [];
+    data.priorGatherings.forEach(function (g) {
+      timeline.push(Object.assign({}, g, { inCurrentCycle: false }));
+    });
+    data.currentCycle.gatherings.forEach(function (g) {
+      timeline.push(Object.assign({}, g, { inCurrentCycle: true }));
+    });
+    timeline.sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+
+    function declarationFor(member, date) {
+      return data.goodCauseDeclarations.find(function (d) {
+        return d.member === member && d.missedGathering === date;
+      });
+    }
+
+    // Status of one member at one gathering: 'attended' | 'absent' | 'unknown'
+    function statusAt(member, g) {
+      if (Array.isArray(g.attendees)) {
+        if (g.attendees.indexOf(member) !== -1) return "attended";
+        if (g.absentees && g.absentees.indexOf(member) !== -1) return "absent";
+        return "unknown";
+      }
+      // roster not recorded / gathering hasn't happened yet
+      if (g.absentees && g.absentees.indexOf(member) !== -1) return "absent";
+      if (declarationFor(member, g.date)) return "absent"; // declared future absence
+      return "unknown";
+    }
+
+    function daysBetween(dateA, dateB) {
+      var a = new Date(dateA + "T00:00:00Z");
+      var b = new Date(dateB + "T00:00:00Z");
+      return Math.round((b - a) / 86400000);
+    }
+
+    function causeInfo(member, date) {
+      var d = declarationFor(member, date);
+      if (!d) return { declared: false, valid: false, text: "no Good Cause declared" };
+      if (!d.declaredDate) {
+        return {
+          declared: true,
+          valid: false,
+          unconfirmed: true,
+          text: "Good Cause claimed but no declaration date on file (unconfirmed)"
+        };
+      }
+      var notice = daysBetween(d.declaredDate, date);
+      var weeks = (notice / 7).toFixed(1);
+      var ok = notice >= 28;
+      return {
+        declared: true,
+        valid: ok,
+        text: "Good Cause declared " + d.declaredDate + " (" + weeks + " weeks' notice, " + (ok ? "meets" : "misses") + " the 4-week requirement)"
+      };
+    }
+
+    // Current consecutive-absence streak for a member: walk the timeline
+    // backwards from most recent, stop at the first 'attended' or the
+    // first 'unknown' (can't extend a confirmed streak through a gap).
+    function consecutiveStreak(member) {
+      var streak = [];
+      for (var i = timeline.length - 1; i >= 0; i--) {
+        var s = statusAt(member, timeline[i]);
+        if (s === "attended") break;
+        if (s === "unknown") {
+          if (timeline[i].scheduled) continue; // hasn't happened yet; not a data gap
+          break;
+        }
+        streak.unshift(timeline[i]);
+      }
+      return streak;
+    }
+
+    // Cycle tally: only gatherings in the current cycle with a recorded roster.
+    function cycleTally(member) {
+      var completed = data.currentCycle.gatherings.filter(function (g) { return Array.isArray(g.attendees); });
+      var attended = completed.filter(function (g) { return g.attendees.indexOf(member) !== -1; }).length;
+      var held = completed.length;
+      var remaining = 8 - held;
+      var best = attended + remaining;
+      var status;
+      if (attended >= 5) status = "secured";
+      else if (best < 5) status = "eliminated";
+      else status = "on-track";
+      return { attended: attended, held: held, status: status };
+    }
+
+    var memberListEl = document.getElementById("member-list");
+    memberListEl.innerHTML = "";
+
+    members.forEach(function (member) {
+      var streak = consecutiveStreak(member);
+      var streakBreachReasons = [];
+      var streakOk = true;
+      var streakHasDefiniteGap = false; // no declaration at all, or a dated-but-late one — not just unconfirmed
+      if (streak.length > 2) {
+        streak.forEach(function (g) {
+          var c = causeInfo(member, g.date);
+          if (!c.declared || !c.valid) {
+            streakOk = false;
+            streakBreachReasons.push(g.date + ": " + c.text);
+            if (!c.unconfirmed) streakHasDefiniteGap = true;
+          }
+        });
+      }
+
+      var tally = cycleTally(member);
+
+      var overall = "good";
+      var reasoningLines = [];
+
+      reasoningLines.push(
+        "Current cycle: attended " + tally.attended + " of " + tally.held +
+        " Gathering(s) held so far (cycle runs to 8; " + (8 - tally.held) + " remaining)."
+      );
+      if (tally.status === "eliminated") {
+        overall = "breach";
+        reasoningLines.push("Mathematically can no longer reach 5 of 8 this cycle.");
+      } else if (tally.attended < 5) {
+        reasoningLines.push("On track — still possible to reach 5 of 8.");
+      } else {
+        reasoningLines.push("Already secured 5 of 8 for this cycle.");
+      }
+
+      if (streak.length === 0) {
+        reasoningLines.push("No absences on file for the most recent run of Gatherings.");
+      } else {
+        reasoningLines.push(
+          "Current consecutive-absence run: " + streak.length + " Gathering(s) (" +
+          streak.map(function (g) { return g.date; }).join(", ") + ")."
+        );
+        if (streak.length <= 2) {
+          reasoningLines.push("At or under the 2-consecutive allowance — no Good Cause required.");
+        } else if (streakOk) {
+          reasoningLines.push("Exceeds 2 consecutive, but every absence in the run has a valid, timely Good Cause declaration.");
+        } else {
+          reasoningLines.push("Exceeds 2 consecutive, and: " + streakBreachReasons.join("; ") + ".");
+          if (streakHasDefiniteGap) {
+            overall = "breach";
+            reasoningLines.push("At least one of those absences has a confirmed missing or late Good Cause declaration — that alone is enough to breach this rule, independent of any other unconfirmed entries above.");
+          } else {
+            overall = "risk";
+            reasoningLines.push("Flagged At Risk rather than a hard Breach because the only shortfall is an unconfirmed (claimed-but-undated) declaration — resolve it above to finalize.");
+          }
+        }
+      }
+
+      var pillClass = overall === "good" ? "status-good" : overall === "risk" ? "status-risk" : "status-breach";
+      var pillText = overall === "good" ? "Good Standing" : overall === "risk" ? "At Risk" : "Breach";
+
+      var card = document.createElement("div");
+      card.className = "member-card";
+      card.innerHTML =
+        '<div class="member-head">' +
+          '<span class="member-name">' + member + '</span>' +
+          '<span class="member-tally">' + tally.attended + '/' + tally.held + ' this cycle</span>' +
+          '<span class="status-pill ' + pillClass + '">' + pillText + '</span>' +
+        '</div>' +
+        '<div class="member-reasoning"><ul>' +
+          reasoningLines.map(function (l) { return "<li>" + l + "</li>"; }).join("") +
+        '</ul></div>';
+      memberListEl.appendChild(card);
+    });
+
+    // Gathering log table
+    var gBody = document.querySelector("#gathering-table tbody");
+    gBody.innerHTML = "";
+    timeline.forEach(function (g) {
+      var tr = document.createElement("tr");
+      var attended = Array.isArray(g.attendees) ? g.attendees.join(", ") : '<span class="muted">not on file</span>';
+      var absent = g.absentees && g.absentees.length ? g.absentees.join(", ") : '<span class="muted">&mdash;</span>';
+      var notes = (g.note || g.source || "") + (g.scheduled ? " (scheduled, not yet occurred)" : "");
+      tr.innerHTML =
+        "<td>" + g.date + (g.inCurrentCycle ? "" : ' <span class="muted">(prior cycle)</span>') + "</td>" +
+        "<td>" + attended + "</td>" +
+        "<td>" + absent + "</td>" +
+        "<td class='muted'>" + notes + "</td>";
+      gBody.appendChild(tr);
+    });
+
+    // Good Cause table
+    var cBody = document.querySelector("#cause-table tbody");
+    cBody.innerHTML = "";
+    data.goodCauseDeclarations.forEach(function (d) {
+      var c = causeInfo(d.member, d.missedGathering);
+      var declared = d.declaredDate || '<span class="flag">unconfirmed</span>';
+      var notice = d.declaredDate ? ((daysBetween(d.declaredDate, d.missedGathering) / 7).toFixed(1) + " wks") : '<span class="flag">n/a</span>';
+      var tr = document.createElement("tr");
+      tr.innerHTML =
+        "<td>" + d.member + "</td>" +
+        "<td>" + d.missedGathering + "</td>" +
+        "<td>" + declared + "</td>" +
+        "<td>" + notice + "</td>" +
+        "<td>" + d.reason + (d.confirmed ? "" : ' <span class="flag">(' + d.source + ')</span>') + "</td>";
+      cBody.appendChild(tr);
+    });
+  }
+})();
+</script>
+</body>
+</html>
